@@ -7,7 +7,7 @@ public class Camera {
 
 	private Vector3f position = new Vector3f(0, 10, 0);
 	private float pitch;
-	private float yaw;
+	private float yaw = 180;
 	private float roll;
 	private float speed;
 	public static final float SENSITIVITY = 0.2f;
