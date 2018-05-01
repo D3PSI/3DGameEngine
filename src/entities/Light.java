@@ -20,7 +20,7 @@ public class Light {
 		this.position = position;
 	}
 
-	public Vector3f getColours() {
+	public Vector3f getColour() {
 		return colours;
 	}
 
