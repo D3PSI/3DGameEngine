@@ -28,18 +28,22 @@ public class MainGameLoop {
 		TexturedModel tree = new TexturedModel(OBJLoader.loadObjModel("tree", loader), new ModelTexture(loader.loadTexture("tree")));
 		TexturedModel grass = new TexturedModel(OBJLoader.loadObjModel("grassModel", loader), new ModelTexture(loader.loadTexture("grassTexture")));
 		TexturedModel fern = new TexturedModel(OBJLoader.loadObjModel("fern", loader), new ModelTexture(loader.loadTexture("fern")));
+		TexturedModel flower = new TexturedModel(OBJLoader.loadObjModel("grassModel", loader), new ModelTexture(loader.loadTexture("flower")));
 		TexturedModel dragon = new TexturedModel(OBJLoader.loadObjModel("dragon", loader), new ModelTexture(loader.loadTexture("dragonTexture")));
 		
 		grass.getTexture().setHasTransparency(true);
 		grass.getTexture().setUseFakeLighting(true);
 		fern.getTexture().setHasTransparency(true);
 		fern.getTexture().setUseFakeLighting(true);
+		flower.getTexture().setHasTransparency(true);
+		flower.getTexture().setUseFakeLighting(true);
 		
 		List<Entity> entities = new ArrayList<Entity>();
 		Random random = new Random();
-		for(int i = 0; i < 10000; i++){
+		for(int i = 0; i < 1000; i++){
 			entities.add(new Entity(tree, new Vector3f(random.nextFloat() * 1600,0,random.nextFloat() * 800), 0, 0, 0, 3));
 			entities.add(new Entity(grass, new Vector3f(random.nextFloat() * 1600,0,random.nextFloat() * 800), 0, 0, 0, 1));
+			entities.add(new Entity(flower, new Vector3f(random.nextFloat() * 1600,0,random.nextFloat() * 800), 0, 0, 0, 1));
 			entities.add(new Entity(fern, new Vector3f(random.nextFloat() * 1600,0,random.nextFloat() * 800), 0, 0, 0, 0.6f));
 		}
 		entities.add(new Entity(dragon, new Vector3f(10, 0, 10), 0, 0, 0, 1));
