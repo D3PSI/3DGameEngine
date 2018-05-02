@@ -26,6 +26,7 @@ public class MainGameLoop {
 		Loader loader = new Loader();
 		
 		TexturedModel tree = new TexturedModel(OBJLoader.loadObjModel("tree", loader), new ModelTexture(loader.loadTexture("tree")));
+		TexturedModel lowPolyTree = new TexturedModel(OBJLoader.loadObjModel("lowPolyTree", loader), new ModelTexture(loader.loadTexture("lowPolyTree")));
 		TexturedModel grass = new TexturedModel(OBJLoader.loadObjModel("grassModel", loader), new ModelTexture(loader.loadTexture("grassTexture")));
 		TexturedModel fern = new TexturedModel(OBJLoader.loadObjModel("fern", loader), new ModelTexture(loader.loadTexture("fern")));
 		TexturedModel flower = new TexturedModel(OBJLoader.loadObjModel("grassModel", loader), new ModelTexture(loader.loadTexture("flower")));
@@ -40,13 +41,20 @@ public class MainGameLoop {
 		
 		List<Entity> entities = new ArrayList<Entity>();
 		Random random = new Random();
-		for(int i = 0; i < 1000; i++){
+		
+		for(int i = 0; i < 10000; i++){
 			entities.add(new Entity(tree, new Vector3f(random.nextFloat() * 1600,0,random.nextFloat() * 800), 0, 0, 0, 3));
 			entities.add(new Entity(grass, new Vector3f(random.nextFloat() * 1600,0,random.nextFloat() * 800), 0, 0, 0, 1));
 			entities.add(new Entity(flower, new Vector3f(random.nextFloat() * 1600,0,random.nextFloat() * 800), 0, 0, 0, 1));
 			entities.add(new Entity(fern, new Vector3f(random.nextFloat() * 1600,0,random.nextFloat() * 800), 0, 0, 0, 0.6f));
 		}
+		
+		for(int i = 0; i < 500; i++) {
+			entities.add(new Entity(lowPolyTree, new Vector3f(random.nextFloat() * 1600,0,random.nextFloat() * 800), 0, 0, 0, 1));
+		}
+		
 		entities.add(new Entity(dragon, new Vector3f(10, 0, 10), 0, 0, 0, 1));
+		
 		dragon.getTexture().setReflectivity(0.6f);
 		tree.getTexture().setReflectivity(0.1f);
 		grass.getTexture().setReflectivity(0.1f);
