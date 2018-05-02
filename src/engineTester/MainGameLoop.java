@@ -11,6 +11,7 @@ import entities.Camera;
 import entities.Entity;
 import entities.Light;
 import entities.Player;
+import models.RawModel;
 import models.TexturedModel;
 import renderEngine.DisplayManager;
 import renderEngine.Loader;
@@ -46,9 +47,6 @@ public class MainGameLoop {
 		TexturedModel fern = new TexturedModel(OBJLoader.loadObjModel("fern", loader), new ModelTexture(loader.loadTexture("fern")));
 		TexturedModel flower = new TexturedModel(OBJLoader.loadObjModel("grassModel", loader), new ModelTexture(loader.loadTexture("flower")));
 		TexturedModel dragon = new TexturedModel(OBJLoader.loadObjModel("dragon", loader), new ModelTexture(loader.loadTexture("dragonTexture")));
-		TexturedModel playerModel = new TexturedModel(OBJLoader.loadObjModel("stanfordBunny", loader), new ModelTexture(loader.loadTexture("white")));
-		
-		Player player = new Player(playerModel, new Vector3f(100, 0, -50), 0, 0, 0, 1);
 		
 		grass.getTexture().setHasTransparency(true);
 		grass.getTexture().setUseFakeLighting(true);
@@ -72,7 +70,6 @@ public class MainGameLoop {
 		}
 		
 		entities.add(new Entity(dragon, new Vector3f(10, 0, 10), 0, 0, 0, 1));
-		entities.add(new Entity(player, new Vector3f(10, 0, 10), 0, 0, 0, 1));
 		
 		dragon.getTexture().setReflectivity(0.6f);
 		tree.getTexture().setReflectivity(0.1f);
@@ -87,10 +84,15 @@ public class MainGameLoop {
 		Camera camera = new Camera();	
 		MasterRenderer renderer = new MasterRenderer();
 		
+		RawModel bunnyModel = OBJLoader.loadObjModel("stanfordBunny", loader);
+		TexturedModel stanfordBunny = new TexturedModel(bunnyModel, new ModelTexture(loader.loadTexture("white")));
+		
+		Player player = new Player(stanfordBunny, new Vector3f(0, 0, 0), 0, 0, 0, 1);
+		
 		while(!Display.isCloseRequested()){
 			camera.move();
 			player.move();
-			
+			renderer.processEntity(player);
 			renderer.processTerrain(terrain);
 			renderer.processTerrain(terrain2);
 			for(Entity entity:entities){
