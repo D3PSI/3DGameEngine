@@ -1,7 +1,6 @@
 package engineTester;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.ArrayList;import java.util.List;
 import java.util.Random;
 
 import org.lwjgl.opengl.Display;
@@ -11,7 +10,6 @@ import entities.Camera;
 import entities.Entity;
 import entities.Light;
 import entities.Player;
-import models.RawModel;
 import models.TexturedModel;
 import renderEngine.DisplayManager;
 import renderEngine.Loader;
@@ -41,19 +39,27 @@ public class MainGameLoop {
 		
 		//************************************************************************************
 		
+		//****************************TEXTURE CREATION STUFF**********************************
 		TexturedModel tree = new TexturedModel(OBJLoader.loadObjModel("tree", loader), new ModelTexture(loader.loadTexture("tree")));
 		TexturedModel lowPolyTree = new TexturedModel(OBJLoader.loadObjModel("lowPolyTree", loader), new ModelTexture(loader.loadTexture("lowPolyTree")));
 		TexturedModel grass = new TexturedModel(OBJLoader.loadObjModel("grassModel", loader), new ModelTexture(loader.loadTexture("grassTexture")));
 		TexturedModel fern = new TexturedModel(OBJLoader.loadObjModel("fern", loader), new ModelTexture(loader.loadTexture("fern")));
 		TexturedModel flower = new TexturedModel(OBJLoader.loadObjModel("grassModel", loader), new ModelTexture(loader.loadTexture("flower")));
 		TexturedModel dragon = new TexturedModel(OBJLoader.loadObjModel("dragon", loader), new ModelTexture(loader.loadTexture("dragonTexture")));
+		TexturedModel playerModel = new TexturedModel(OBJLoader.loadObjModel("person", loader), new ModelTexture(loader.loadTexture("playerTexture")));
 		
+		Player player = new Player(playerModel, new Vector3f(0, 0, 0), 0, 0, 0, 1);
+
 		grass.getTexture().setHasTransparency(true);
 		grass.getTexture().setUseFakeLighting(true);
 		fern.getTexture().setHasTransparency(true);
 		fern.getTexture().setUseFakeLighting(true);
 		flower.getTexture().setHasTransparency(true);
 		flower.getTexture().setUseFakeLighting(true);
+		
+		//************************************************************************************
+		
+		//****************************TEXTURE RENDERING STUFF*********************************
 		
 		List<Entity> entities = new ArrayList<Entity>();
 		Random random = new Random();
@@ -76,18 +82,16 @@ public class MainGameLoop {
 		grass.getTexture().setReflectivity(0.1f);
 		fern.getTexture().setReflectivity(0.1f);
 		
+		//************************************************************************************
+		
 		Light light = new Light(new Vector3f(200, 2000, 200),new Vector3f(1,1,1));
 		
 		Terrain terrain = new Terrain(1, 0, loader, texturePack, blendMap);
 		Terrain terrain2 = new Terrain(0, 0, loader, texturePack, blendMap);
 		
-		Camera camera = new Camera();	
+		Camera camera = new Camera(player);	
 		MasterRenderer renderer = new MasterRenderer();
 		
-		RawModel bunnyModel = OBJLoader.loadObjModel("stanfordBunny", loader);
-		TexturedModel stanfordBunny = new TexturedModel(bunnyModel, new ModelTexture(loader.loadTexture("white")));
-		
-		Player player = new Player(stanfordBunny, new Vector3f(0, 0, 0), 0, 0, 0, 1);
 		
 		while(!Display.isCloseRequested()){
 			camera.move();
