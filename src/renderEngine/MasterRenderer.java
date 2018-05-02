@@ -56,11 +56,11 @@ public class MasterRenderer {
         shader.start();
         shader.loadLight(sun);
         shader.loadViewMatrix(camera);
+        renderer.render(entities);
         shader.stop();
         terrainShader.start();
         terrainShader.loadLight(sun);
         terrainShader.loadViewMatrix(camera);
-        renderer.render(entities);
         terrainRenderer.render(terrains);
         terrainShader.stop();
         terrains.clear();
