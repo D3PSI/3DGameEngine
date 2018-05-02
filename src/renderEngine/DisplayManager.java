@@ -10,8 +10,8 @@ import org.lwjgl.opengl.PixelFormat;
 
 public class DisplayManager {
 	
-	private static final int WIDTH = 1720;
-	private static final int HEIGHT = 980;
+	private static final int WIDTH = 1900;
+	private static final int HEIGHT = 1060;
 	private static final int FPS_CAP = 120;
 	private static final String TITLE = "3D Game Engine" ;
 	
