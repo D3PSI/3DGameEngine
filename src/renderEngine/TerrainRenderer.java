@@ -1,7 +1,6 @@
 package renderEngine;
  
-import java.util.List;
- 
+import java.util.List; 
 import models.RawModel;
  
 import org.lwjgl.opengl.GL11;
@@ -13,7 +12,6 @@ import org.lwjgl.util.vector.Vector3f;
  
 import shaders.TerrainShader;
 import terrains.Terrain;
-import textures.ModelTexture;
 import textures.TerrainTexturePack;
 import toolbox.Maths;
  
