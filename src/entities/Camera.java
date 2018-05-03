@@ -8,7 +8,7 @@ public class Camera {
 	private float distanceFromPlayer = 50;
 	private float angleAroundPlayer = 0;
 
-	private Vector3f position = new Vector3f(0, 10, 0);
+	private Vector3f position = new Vector3f(0, 3, 0);
 	private float pitch;
 	private float yaw = 180;
 	private float roll;
@@ -56,7 +56,7 @@ public class Camera {
 		float offsetZ = (float) (horizontalDistance * Math.cos(Math.toRadians(theta)));
 		position.x = player.getPosition().x - offsetX;
 		position.z = player.getPosition().z - offsetZ;
-		position.y = player.getPosition().y + verticalDistance + 10;
+		position.y = player.getPosition().y + verticalDistance + 3;
 	}
 	
 	private float calculateHorizontalDistance() {

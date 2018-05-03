@@ -29,10 +29,10 @@ public class MainGameLoop {
 		
 		//****************************TERRAIN TEXTURE STUFF***********************************
 		
-		TerrainTexture backgroundTexture = new TerrainTexture(loader.loadTexture("grassy"));
+		TerrainTexture backgroundTexture = new TerrainTexture(loader.loadTexture("grassy3"));
 		TerrainTexture rTexture = new TerrainTexture(loader.loadTexture("dirt"));
 		TerrainTexture gTexture = new TerrainTexture(loader.loadTexture("pinkFlowers"));
-		TerrainTexture bTexture = new TerrainTexture(loader.loadTexture("path"));
+		TerrainTexture bTexture = new TerrainTexture(loader.loadTexture("mossPath256"));
 		
 		TerrainTexturePack texturePack = new TerrainTexturePack(backgroundTexture, rTexture, gTexture, bTexture);
 		TerrainTexture blendMap = new TerrainTexture(loader.loadTexture("blendMap"));
@@ -46,9 +46,10 @@ public class MainGameLoop {
 		TexturedModel fern = new TexturedModel(OBJLoader.loadObjModel("fern", loader), new ModelTexture(loader.loadTexture("fern")));
 		TexturedModel flower = new TexturedModel(OBJLoader.loadObjModel("grassModel", loader), new ModelTexture(loader.loadTexture("flower")));
 		TexturedModel dragon = new TexturedModel(OBJLoader.loadObjModel("dragon", loader), new ModelTexture(loader.loadTexture("dragonTexture")));
+		TexturedModel box = new TexturedModel(OBJLoader.loadObjModel("box", loader), new ModelTexture(loader.loadTexture("box")));
 		TexturedModel playerModel = new TexturedModel(OBJLoader.loadObjModel("person", loader), new ModelTexture(loader.loadTexture("playerTexture")));
 		
-		Player player = new Player(playerModel, new Vector3f(0, 0, 0), 0, 0, 0, 1);
+		Player player = new Player(playerModel, new Vector3f(0, 0, 0), 0, 0, 0, 0.3f);
 
 		grass.getTexture().setHasTransparency(true);
 		grass.getTexture().setUseFakeLighting(true);
@@ -65,16 +66,19 @@ public class MainGameLoop {
 		Random random = new Random();
 		
 		for(int i = 0; i < 1000; i++){
-			entities.add(new Entity(tree, new Vector3f(random.nextFloat() * 1600,0,random.nextFloat() * 800), 0, 0, 0, 3));
-			entities.add(new Entity(grass, new Vector3f(random.nextFloat() * 1600,0,random.nextFloat() * 800), 0, 0, 0, 1));
-			entities.add(new Entity(flower, new Vector3f(random.nextFloat() * 1600,0,random.nextFloat() * 800), 0, 0, 0, 1));
-			entities.add(new Entity(fern, new Vector3f(random.nextFloat() * 1600,0,random.nextFloat() * 800), 0, 0, 0, 0.6f));
+			entities.add(new Entity(tree, new Vector3f(random.nextFloat() * 1600, 0, random.nextFloat() * 800), 0, 0, 0, 3));
+			entities.add(new Entity(grass, new Vector3f(random.nextFloat() * 1600, 0, random.nextFloat() * 800), 0, 0, 0, 1));
+			entities.add(new Entity(flower, new Vector3f(random.nextFloat() * 1600, 0, random.nextFloat() * 800), 0, 0, 0, 1));
+			entities.add(new Entity(fern, new Vector3f(random.nextFloat() * 1600, 0, random.nextFloat() * 800), 0, 0, 0, 0.6f));
 		}
 		
 		for(int i = 0; i < 500; i++) {
 			entities.add(new Entity(lowPolyTree, new Vector3f(random.nextFloat() * 1600,0,random.nextFloat() * 800), 0, 0, 0, 1));
 		}
 		
+		for(int i = 0; i < 200; i++) {
+			entities.add(new Entity(box, new Vector3f(random.nextFloat() * 1600, 10, random.nextFloat() * 800), 0, 0, 0, 10));
+		}
 		entities.add(new Entity(dragon, new Vector3f(10, 0, 10), 0, 0, 0, 1));
 		
 		dragon.getTexture().setReflectivity(0.6f);
@@ -96,12 +100,15 @@ public class MainGameLoop {
 		while(!Display.isCloseRequested()){
 			camera.move();
 			player.move();
+			
 			renderer.processEntity(player);
 			renderer.processTerrain(terrain);
 			renderer.processTerrain(terrain2);
+			
 			for(Entity entity:entities){
 				renderer.processEntity(entity);
 			}
+			
 			renderer.render(light, camera);
 			DisplayManager.updateDisplay();
 		}

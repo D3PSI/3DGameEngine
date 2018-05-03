@@ -1,17 +1,16 @@
 package renderEngine;
 
-import org.lwjgl.LWJGLException;
-import org.lwjgl.Sys;
+import org.lwjgl.LWJGLException;import org.lwjgl.Sys;
 import org.lwjgl.opengl.ContextAttribs;
 import org.lwjgl.opengl.Display;
-import org.lwjgl.opengl.DisplayMode;
+//import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.PixelFormat;
 
 public class DisplayManager {
 	
-	private static final int WIDTH = 1900;
-	private static final int HEIGHT = 1060;
+	private static final int WIDTH = 1920;
+	private static final int HEIGHT = 1080;
 	private static final int FPS_CAP = 120;
 	private static final String TITLE = "3D Game Engine" ;
 	
@@ -26,8 +25,9 @@ public class DisplayManager {
 		
 		
 		try {
-			Display.setDisplayMode(new DisplayMode(WIDTH, HEIGHT));
+		//	Display.setDisplayMode(new DisplayMode(WIDTH, HEIGHT));
 			Display.create(new PixelFormat(), attribs);
+			Display.setFullscreen(true);
 			Display.setTitle(TITLE);
 		} catch (LWJGLException e) {
 			e.printStackTrace();
