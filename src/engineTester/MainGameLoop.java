@@ -38,7 +38,7 @@ public class MainGameLoop {
 		TerrainTexturePack texturePack = new TerrainTexturePack(backgroundTexture, rTexture, gTexture, bTexture);
 		TerrainTexture blendMap = new TerrainTexture(loader.loadTexture("blendMap"));
 		
-		Terrain terrain1 = new Terrain(0, -1, loader, texturePack, blendMap, "heightmap");
+		Terrain terrain = new Terrain(0, -1, loader, texturePack, blendMap, "heightmap");
 		//Terrain terrain2 = new Terrain(-1, -1, loader, texturePack, blendMap, "heightmap");
 		//************************************************************************************
 		
@@ -71,7 +71,8 @@ public class MainGameLoop {
 			if(i % 20 == 0) {
 				float x = random.nextFloat() * 800 - 400;
 				float z = random.nextFloat() * -600;
-				float y = terrain1.getHeightOfTerrain(x, z);
+				float y = terrain.getHeightOfTerrain(x, z);
+				
 				entities.add(new Entity(tree, new Vector3f(x, y, z), 0, random.nextFloat() * 360, 0, 3));
 				entities.add(new Entity(grass, new Vector3f(x, y, z), 0, random.nextFloat() * 360, 0, 1));
 				entities.add(new Entity(flower, new Vector3f(x, y, z), 0, random.nextFloat() * 360, 0, 1));
@@ -83,14 +84,15 @@ public class MainGameLoop {
 			if(i % 20 == 0) {
 				float x = random.nextFloat() * 800 - 400;
 				float z = random.nextFloat() * -600;
-				float y = terrain1.getHeightOfTerrain(x, z);
+				float y = terrain.getHeightOfTerrain(x, z);
+				
 				entities.add(new Entity(lowPolyTree, new Vector3f(x, y, z), 0, random.nextFloat() * 360, 0, 1));
-				}	
+				}
 			}
 
 		float x = random.nextFloat() * 800 - 400;
 		float z = random.nextFloat() * -600;
-		float y = terrain1.getHeightOfTerrain(x, z);
+		float y = terrain.getHeightOfTerrain(x, z);
 		
 		entities.add(new Entity(dragon, new Vector3f(x, y, z), 0, random.nextFloat() * 360, 0, 1));
 			
@@ -110,10 +112,10 @@ public class MainGameLoop {
 		
 		
 		while(!Display.isCloseRequested()){
+			player.move(terrain);
 			camera.move();
-			player.move(terrain1);
 			
-			renderer.processTerrain(terrain1);
+			renderer.processTerrain(terrain);
 				
 			for(Entity entity:entities){
 				renderer.processEntity(entity);

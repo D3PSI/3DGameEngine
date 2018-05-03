@@ -48,8 +48,6 @@ public class Terrain {
     public RawModel getModel() {
         return model;
     }
-    
-    
  
     public TerrainTexturePack getTexturePack() {
 		return texturePack;
@@ -97,7 +95,7 @@ public class Terrain {
 		float zCoord = (terrainZ % gridSquareSize) / gridSquareSize;
 		float answer;
 		
-		if (xCoord <= (1-zCoord)) {
+		if (xCoord <= (1 - zCoord)) {
 			answer = Maths.barryCentric(new Vector3f(0, heights[gridX][gridZ], 0), new Vector3f(1, heights[gridX + 1][gridZ], 0), new Vector3f(0, heights[gridX][gridZ + 1], 1), new Vector2f(xCoord, zCoord));
 		} else {
 			answer = Maths.barryCentric(new Vector3f(1, heights[gridX + 1][gridZ], 0), new Vector3f(1, heights[gridX + 1][gridZ + 1], 1), new Vector3f(0, heights[gridX][gridZ + 1], 1), new Vector2f(xCoord, zCoord));
