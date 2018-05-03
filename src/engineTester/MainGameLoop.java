@@ -88,10 +88,10 @@ public class MainGameLoop {
 		
 		//************************************************************************************
 		
-		Light light = new Light(new Vector3f(200, 2000, 200),new Vector3f(1,1,1));
+		Light light = new Light(new Vector3f(200, 200, 200),new Vector3f(1,1,1));
 		
-		Terrain terrain = new Terrain(1, 0, loader, texturePack, blendMap);
-		Terrain terrain2 = new Terrain(0, 0, loader, texturePack, blendMap);
+		Terrain terrain = new Terrain(1, 0, loader, texturePack, blendMap, "heightmap");
+		Terrain terrain2 = new Terrain(0, 0, loader, texturePack, blendMap, "heightmap");
 		
 		Camera camera = new Camera(player);	
 		MasterRenderer renderer = new MasterRenderer();
