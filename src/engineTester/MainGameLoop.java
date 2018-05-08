@@ -1,6 +1,7 @@
 package engineTester;
 
-import java.util.ArrayList;import java.util.List;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import org.lwjgl.opengl.Display;
@@ -120,7 +121,7 @@ public class MainGameLoop {
 		
 		//************************************************************************************
 		
-		Light light = new Light(new Vector3f(200, 200, 200),new Vector3f(1,1,1));
+		Light light = new Light(new Vector3f(2000, 20000, 2000),new Vector3f(1,1,1));
 		
 		
 		Camera camera = new Camera(player);	
