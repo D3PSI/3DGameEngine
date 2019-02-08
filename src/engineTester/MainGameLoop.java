@@ -44,6 +44,9 @@ public class MainGameLoop {
 		//************************************************************************************
 		
 		//****************************TEXTURE CREATION STUFF**********************************
+		ModelTexture fernTextureAtlas = new ModelTexture(loader.loadTexture("fern"));
+		fernTextureAtlas.setNumberOfRows(2);
+		
 		TexturedModel tree = new TexturedModel(OBJLoader.loadObjModel("tree", loader), new ModelTexture(loader.loadTexture("tree")));
 		TexturedModel lowPolyTree = new TexturedModel(OBJLoader.loadObjModel("lowPolyTree", loader), new ModelTexture(loader.loadTexture("lowPolyTree")));
 		TexturedModel grass = new TexturedModel(OBJLoader.loadObjModel("grassModel", loader), new ModelTexture(loader.loadTexture("grassTexture")));
@@ -73,7 +76,7 @@ public class MainGameLoop {
 			float z = random.nextFloat() * -600;
 			float y = terrain.getHeightOfTerrain(x, z);
 				
-			entities.add(new Entity(fern, new Vector3f(x, y, z), 0, random.nextFloat() * 360, 0, 0.6f));
+			entities.add(new Entity(fern, random.nextInt(4),new Vector3f(x, y, z), 0, random.nextFloat() * 360, 0, 0.6f));
 		}
 
 		for(int i = 0; i < 1000; i++){
@@ -108,8 +111,8 @@ public class MainGameLoop {
 			entities.add(new Entity(lowPolyTree, new Vector3f(x, y, z), 0, random.nextFloat() * 360, 0, 1));
 		}
 
-		float x = random.nextFloat() * 800 - 400;
-		float z = random.nextFloat() * -600;
+		float x = 0;
+		float z = 0;
 		float y = terrain.getHeightOfTerrain(x, z);
 		
 		entities.add(new Entity(dragon, new Vector3f(x, y, z), 0, random.nextFloat() * 360, 0, 1));
